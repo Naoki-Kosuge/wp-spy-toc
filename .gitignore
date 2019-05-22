@@ -1,2 +1,2 @@
-.*
-.DS_Store
+*
+!spy-table-of-contents/
