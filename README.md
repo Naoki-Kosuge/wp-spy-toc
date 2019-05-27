@@ -1,12 +1,12 @@
 # Spy Table of Contents
 **Spy Table of Contents** is a WordPress plugin that easily realizes a table of contents that spies the page or the post.
 
-*Read this in other languages: [English](README.md), [日本語](README.js.md)*
+*Read this in other languages: [English](README.md), [日本語](README.ja.md)*
 
 ## Table of Contents
   - [Shortcodes](#Shortcodes)
-    - [[toc]]([toc])
-    - [[no_toc]](#[no_toc])
+    - [[toc]](toc)
+    - [[no_toc]](#no_toc)
   - [Credit](#Credit)
 
 

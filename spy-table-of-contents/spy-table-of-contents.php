@@ -29,12 +29,12 @@ License:		GPLv2 or later
 /**
  * Introduction of Spy-style TOC into WordPress
  *
- * @package Spy_Table_of_Contents
- * @version 0.1
- * @author Naoki Kosuge <naokikosuge.ict@gmail.com>
+ * @link          https://github.com/Naoki-Kosuge/wp-spy-toc
+ * @version       0.1
+ * @author        Naoki Kosuge <naokikosuge.ict@gmail.com>
  * @copyright (C) 2019 Naoki Kosuge
- * @license http://opensource.org/licenses/gpl-2.0.php GPLv2, or later
- * @link https://github.com/Naoki-Kosuge/wp-spy-toc
+ * @license       http://opensource.org/licenses/gpl-2.0.php GPLv2, or later
+ * @package       Spy_Table_of_Contents
  */
 
 const SPY_TOC_TEXT_DOMAIN = 'spy-table-of-contents';
@@ -75,6 +75,9 @@ SPY_TOC_DEFAULT_LINKS_VISITED_COLOUR = '#';
 
 
 if ( ! class_exists( 'Spy_TOC' ) ) :
+	/**
+	 * Class Spy_TOC
+	 */
 	class Spy_TOC {
 
 		/** @var string eg 'http://www.example.com/wp-content/plugins/spy-table-of-contents' */
@@ -150,22 +153,22 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 
 			// get options
 			$defaults      = [
-				'position'                           => SPY_TOC_POSITION_AFTER_FIRST_HEADING,
-				'start'                              => 4,
-				'auto_insert_post_types'             => [ 'post' ],
-				'show_heading_text'                  => true,
-				'heading_levels'                     => [ '1', '2', '3', '4', '5', '6', ],
-				'heading_text'                       => 'Contents',
-				'visibility'                         => true,
-				'visibility_show'                    => 'show',
-				'visibility_hide'                    => 'hide',
-				'visibility_hide_by_default'         => false,
-				'show_heirarchy'                     => true,
-				'ordered_list'                       => true,
-				'smooth_scroll'                      => false,
+				'position'                   => SPY_TOC_POSITION_AFTER_FIRST_HEADING,
+				'start'                      => 4,
+				'auto_insert_post_types'     => [ 'post' ],
+				'show_heading_text'          => true,
+				'heading_levels'             => [ '1', '2', '3', '4', '5', '6' ],
+				'heading_text'               => 'Contents',
+				'visibility'                 => true,
+				'visibility_show'            => 'show',
+				'visibility_hide'            => 'hide',
+				'visibility_hide_by_default' => false,
+				'show_heirarchy'             => true,
+				'ordered_list'               => true,
+				'smooth_scroll'              => false,
 				// Appearance
-				'width'                              => 'Auto',
-				'width_custom'                       => '275',
+				'width'                      => 'Auto',
+				'width_custom'               => '275',
 				'width_custom_units'                 => 'px',
 				'wrapping'                           => SPY_TOC_WRAPPING_NONE,
 				'font_size'                          => '95',
@@ -255,13 +258,11 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 
 
 		/**
-		 * TODO set_show_toc_in_widget_only()
 		 * Setter for $options['show_toc_in_widget_only']
+		 *
 		 * This will update the DB options table.
 		 *
 		 * @param mixed $value
-		 *
-		 * @uses $options['show_toc_in_widget_only']
 		 */
 		public function set_show_toc_in_widget_only( $value = false ) {
 			if ( $value ) {
@@ -275,13 +276,11 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 		}
 
 		/**
-		 * TODO set_show_toc_in_widget_only_post_types()
 		 * Setter for $options['show_toc_in_widget_only_post_types']
+		 *
 		 * This will update the DB options table.
 		 *
 		 * @param array $value List of post types.
-		 *
-		 * @uses $options['show_toc_in_widget_only_post_types']
 		 */
 		public function set_show_toc_in_widget_only_post_types( $value = [] ) {
 			if ( $value ) {
@@ -308,6 +307,7 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 
 		/**
 		 * Load CSS and javascript files for frontend.
+		 *
 		 * THis is an action added to {@see 'wp_enqueue_scripts'}.
 		 */
 		function wp_enqueue_scripts() {
@@ -323,12 +323,12 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 
 			// enqueue JQuery
 			wp_enqueue_script( 'jquery-3.4.0', $this->path,
-				'/js/jquery-3.4.0.min.js', [], false, true );
+				'/js/jquery-3.4.0.min.js', false, true );
 
 			// JS >>>
 
 			// enqueue Popper.js
-			wp_enqueue_script( 'popper', $this->path, '/js/popper.min.js', [],
+			wp_enqueue_script( 'popper', $this->path, '/js/popper.min.js',
 				false, true );
 
 			// enqueue Bootstrap JS
@@ -360,6 +360,7 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 
 		/**
 		 * Add sub menu page to the Settings menu.
+		 *
 		 * This is an action added to {@see 'admin_menu'}.
 		 *
 		 * @uses admin_options()
@@ -380,7 +381,6 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 
 
 		/**
-		 * TODO widgets_init()
 		 * This is an action added to {@see 'widgets_init'}.
 		 */
 		function widgets_init() {
@@ -388,8 +388,8 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 		}
 
 		/**
-		 * TODO sidebar_admin_setup()
 		 * Remove widget options on widget deletion.
+		 *
 		 * This is an action added to {@see 'sidebar_admin_setup'}.
 		 *
 		 * @uses set_show_toc_in_widget_only()
@@ -398,23 +398,10 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 		function sidebar_admin_setup() {
 			// this action is loaded at the start of the widget screen
 			// so only do the following only when a form action has been initiated
-			if ( 'post' == strtolower( $_SERVER['REQUEST_METHOD'] ) ) {
-				if ( @$_POST['id_base'] == 'spy-toc-widget' ) {
-					if ( isset( $_POST['delete_widget'] ) ) {
-						if ( 1 === (int) $_POST['delete_widget'] ) {
-							$this->set_show_toc_in_widget_only( false );
-							$this->set_show_toc_in_widget_only_post_types( [ 'page' ] );
-						}
-					}
-				}
-			}
-			// this action is loaded at the start of the widget screen
-			// so only do the following only when a form action has been initiated
-			if (
-				'post' == strtolower( $_SERVER['REQUEST_METHOD'] )
-				&& @$_POST['id_base'] == 'spy-toc-widget'
-				&& isset( $_POST['delete_widget'] )
-				&& 1 === (int) $_POST['delete_widget']
+			if ( 'post' == strtolower( $_SERVER['REQUEST_METHOD'] )
+			     && @$_POST['id_base'] == 'spy-toc-widget'
+			     && isset( $_POST['delete_widget'] )
+			     && 1 === (int) $_POST['delete_widget']
 			) {
 				$this->set_show_toc_in_widget_only( false );
 				$this->set_show_toc_in_widget_only_post_types( [ 'page' ] );
@@ -426,11 +413,139 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 		 * TODO the_content()
 		 * This is a filter added to {@see 'the_content'}.
 		 *
-		 * @uses is_eligible()
+		 * @global WP_Post $post
+		 *
+		 * @param string   $content
+		 *
+		 * @return mixed|string
 		 * @uses extract_headings()
 		 * @uses mb_find_replace()
+		 * @uses is_eligible()
 		 */
-		function the_content() {
+		function the_content( $content ) {
+			global $post;
+			$items               = $css_classes = $anchor = '';
+			$custom_toc_position = strpos( $content, '<!--TOC-->' );
+			$find                = $replace = [];
+
+			if ( $this->is_eligible( $custom_toc_position ) ) {
+				$items = $this->extract_headings( $find, $replace, $content );
+
+				if ( $items ) {
+					// do we display the toc within the content or has the user opted
+					// to only show it in the widget?  if so, then we still need to
+					// make the find/replace call to insert the anchors
+					if ( $this->options['show_toc_in_widget_only']
+					     && ( in_array( get_post_type(), $this->options['show_toc_in_widget_only_post_types'] ) )
+					) {
+						$content = $this->mb_find_replace( $find, $replace, $content );
+					} else {
+
+						// wrapping css classes
+						switch ( $this->options['wrapping'] ) {
+							case TOC_WRAPPING_LEFT:
+								$css_classes .= ' toc_wrap_left';
+								break;
+
+							case TOC_WRAPPING_RIGHT:
+								$css_classes .= ' toc_wrap_right';
+								break;
+
+							case TOC_WRAPPING_NONE:
+							default:
+								// do nothing
+						}
+
+						// colour themes
+						switch ( $this->options['theme'] ) {
+							case TOC_THEME_LIGHT_BLUE:
+								$css_classes .= ' toc_light_blue';
+								break;
+
+							case TOC_THEME_WHITE:
+								$css_classes .= ' toc_white';
+								break;
+
+							case TOC_THEME_BLACK:
+								$css_classes .= ' toc_black';
+								break;
+
+							case TOC_THEME_TRANSPARENT:
+								$css_classes .= ' toc_transparent';
+								break;
+
+							case TOC_THEME_GREY:
+							default:
+								// do nothing
+						}
+
+						// bullets?
+						if ( $this->options['bullet_spacing'] ) {
+							$css_classes .= ' have_bullets';
+						} else {
+							$css_classes .= ' no_bullets';
+						}
+
+						if ( $this->options['css_container_class'] ) {
+							$css_classes .= ' ' . $this->options['css_container_class'];
+						}
+
+						$css_classes = trim( $css_classes );
+
+						// an empty class="" is invalid markup!
+						if ( ! $css_classes ) {
+							$css_classes = ' ';
+						}
+
+						// add container, toc title and list items
+						$html = '<div id="toc_container" class="' . $css_classes . '">';
+						if ( $this->options['show_heading_text'] ) {
+							$toc_title = $this->options['heading_text'];
+							if ( strpos( $toc_title, '%PAGE_TITLE%' ) !== false ) {
+								$toc_title = str_replace( '%PAGE_TITLE%', get_the_title(), $toc_title );
+							}
+							if ( strpos( $toc_title, '%PAGE_NAME%' ) !== false ) {
+								$toc_title = str_replace( '%PAGE_NAME%', get_the_title(), $toc_title );
+							}
+							$html .= '<p class="toc_title">' . htmlentities( $toc_title, ENT_COMPAT, 'UTF-8' ) . '</p>';
+						}
+						$html .= '<ul class="toc_list">' . $items . '</ul></div>' . "\n";
+
+						if ( $custom_toc_position !== false ) {
+							$find[]    = '<!--TOC-->';
+							$replace[] = $html;
+							$content   = $this->mb_find_replace( $find, $replace, $content );
+						} else {
+							if ( count( $find ) > 0 ) {
+								switch ( $this->options['position'] ) {
+									case TOC_POSITION_TOP:
+										$content = $html . $this->mb_find_replace( $find, $replace, $content );
+										break;
+
+									case TOC_POSITION_BOTTOM:
+										$content = $this->mb_find_replace( $find, $replace, $content ) . $html;
+										break;
+
+									case TOC_POSITION_AFTER_FIRST_HEADING:
+										$replace[0] = $replace[0] . $html;
+										$content    = $this->mb_find_replace( $find, $replace, $content );
+										break;
+
+									case TOC_POSITION_BEFORE_FIRST_HEADING:
+									default:
+										$replace[0] = $html . $replace[0];
+										$content    = $this->mb_find_replace( $find, $replace, $content );
+								}
+							}
+						}
+					}
+				}
+			} else {
+				// remove <!--TOC--> (inserted from shortcode) from content
+				$content = str_replace( '<!--TOC-->', '', $content );
+			}
+
+			return $content;
 		}
 
 
@@ -532,6 +647,7 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 
 			/* if $heading_levels is an array, then it came from the global options and wasn't provided by per instance */
 			if ( $heading_levels && ! is_array( $heading_levels ) ) {
+				/** @var string $heading_levels */
 				// make sure they are numbers between 1 and 6 and put into
 				// the $clean_heading_levels array if not already
 				$clean_heading_levels = [];
@@ -778,7 +894,7 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
                                                         </th>
                                                         <td>
                                                             <input type="text"
-                                                                   calss=""
+                                                                   class=""
                                                                    value="<?php echo htmlentities( $this->options['visibility-show'],
 																       ENT_COMPAT,
 																       'UTF-8' ); ?>"
@@ -1562,7 +1678,7 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 			);
 
 			// update_option will return false if no changes were made
-			update_options( 'toc-options', $this->options );
+			update_option( 'toc-options', $this->options );
 
 			return true;
 		}
@@ -1580,6 +1696,7 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 
 		/**
 		 * Tries to convert $string into a valid hex colour.
+		 *
 		 * Returns $default if $string is not a hex value, otherwise returns verified hex.
 		 *
 		 * @param string $string
@@ -1618,19 +1735,18 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 
 
 		/**
-		 * TODO is_eligible()
 		 * Returns true if the table of contents is eligible to be printed, false otherwise.
 		 *
-		 * @param bool $shortcode_used True if short code is used in the content.
+		 * @global WP_Post $post           The post object for the current post.
+		 *
+		 * @param bool     $shortcode_used True if short code is used in the content.
 		 *
 		 * @return bool
 		 * @used-by the_content()
 		 * @uses    $options['include_homepage']
 		 * @uses    $options['auto_insert_post_types']
 		 */
-		public function is_eligible(
-			$shortcode_used = false
-		) {
+		public function is_eligible( $shortcode_used = false ) {
 			global $post;
 
 			// do not trigger the TOC when displaying an XML/RSS feed
@@ -1669,7 +1785,6 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 
 
 		/**
-		 * TODO extract_heading()
 		 * Extracts headings from the html formatted $content.
 		 *
 		 * @param array  &$find
@@ -1678,13 +1793,9 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 		 *
 		 * @return string|bool
 		 * @used-by the_content(), Spy_TOC_Widget::widget(),
-		 * @uses    $options['heading_levels']
 		 * @uses    url_anchor_target()
-		 * @uses    $options['ordered_list']
-		 * @uses    $options['show_heirarchy'], build_hierarchy()
 		 */
-		private
-		function extract_heading(
+		public function extract_headings(
 			&$find,
 			&$replace,
 			$content = ''
@@ -1888,12 +1999,48 @@ if ( ! class_exists( 'Spy_TOC' ) ) :
 
 
 		/**
-		 * TODO mb_find_replace()
+		 * Returns a string with all items from the $find array replaced with their matching
+		 * items in the $replace array.
+		 *
+		 * This does a one to one replacement (rather than
+		 * globally).
+		 * This function is multibyte safe.
+		 * $find and $replace are arrays, $string is the haystack.  All variables are
+		 * passed by reference.
+		 *
+		 * @param array|false &$find
+		 * @param array|false &$replace
+		 * @param string      &$string
+		 *
+		 * @return string
 		 *
 		 * @used-by the_content()
 		 */
-		private
-		function mb_find_replace() {
+		private function mb_find_replace( &$find = false, &$replace = false, &$string = '' ) {
+			if ( is_array( $find ) && is_array( $replace ) && $string ) {
+				// check if multibyte strings are supported
+				if ( function_exists( 'mb_strpos' ) ) {
+					for ( $i = 0; $i < count( $find ); $i ++ ) {
+						$string =
+							mb_substr( $string, 0, mb_strpos( $string, $find[ $i ] ) ) .    // everything befor $find
+							$replace[ $i ] .                                                // its replacement
+							mb_substr( $string, mb_strpos( $string,
+									$find[ $i ] ) + mb_strlen( $find[ $i ] ) )    // everything after $find
+						;
+					}
+				} else {
+					for ( $i = 0; $i < count( $find ); $i ++ ) {
+						$string = substr_replace(
+							$string,
+							$replace[ $i ],
+							strpos( $string, $find[ $i ] ),
+							strlen( $find[ $i ] )
+						);
+					}
+				}
+			}
+
+			return $string;
 		}
 
 
@@ -1908,7 +2055,7 @@ add_action( 'widgets_init', function () {
 
 if ( ! class_exists( 'Spy_TOC_Widget' ) ) :
 	/**
-	 * Spy TOC Widget
+	 * Class Spy_TOC_Widget
 	 *
 	 * @see WP_Widget
 	 */
