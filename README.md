@@ -5,7 +5,7 @@
 
 ## Table of Contents
   - [Shortcodes](#Shortcodes)
-    - [[toc]](toc)
+    - [[toc]](#toc)
     - [[no_toc]](#no_toc)
   - [Credit](#Credit)
 
